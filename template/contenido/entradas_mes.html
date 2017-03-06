@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block cabezera %}miblog|{{ month|date:"F" }}{% endblock %}
+
+{% block section %}
+  <section>
+  	  <h2>  Entradas del Mes de  <h2>
+  	{% for entrada in entradas %}
+  	
+  	{% ifchanged %} <h3> {{entrada.fecha_de_publicacion|date:"Y/m/d"}}</h3>{% endifchanged %}
+  	
+  	<li> {{ forloop.counter }}<a href="{{entrada.fecha_de_publicacion|date:"d"}}/{{entrada.pk}}">
+  	{{ entrada }}</a></li>
+  	{% endfor %}
+  	</ul>
+  </section>
+{% endblock %}
+

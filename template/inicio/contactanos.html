@@ -1,0 +1,65 @@
+{% extends "index.html" %}
+
+{%load staticfiles%}
+
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/contactanos.css'%}">
+{%endblock style%}
+
+{% block section %}
+<section>
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><span>Contactanos</span></li>
+		</ul>
+	</div>
+	<div class="contactanos" id="contactanos">
+		<h2 class="titulo">Contactanos</h2>
+			<div class="formulario">
+				
+				<form action="" method="POST">
+					{% csrf_token %}
+					
+					<div class="datos">
+						<table>
+							<tr>
+								
+								<td>
+									<label for="nombre">Nombre</label>
+									{{contacto.nombre}}
+									{{contacto.nombre.errors}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="email">Email</label>
+									{{contacto.email}}
+									{{contacto.email.errors}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="asunto">Asunto</label>
+									{{contacto.asunto}}
+									{{contacto.asunto.errors}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="mensaje">
+						<label for="mensaje">Mensaje</label>
+						{{contacto.mensaje}}	
+					</div>
+					
+					<div class="botonera">
+						<input type="submit" class="btn_more" value="Enviar Mensaje">	
+					</div>
+				</form>
+			</div>
+		
+	</div>
+</section>
+{% endblock section %}
+

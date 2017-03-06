@@ -1,0 +1,101 @@
+{%extends 'index.html'%}
+{%load staticfiles%}
+
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/articulos.css'%}">
+{%endblock style%}
+
+
+{%block section%}
+<section>
+
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><span>Articulos</span></li>
+				{% if request.user.is_authenticated %}
+			<li style="text-decoration:none;"><a href="{% url 'borradores' %}" class="btn ">Ver Borradores</a></li>
+			
+		{% endif %}
+		</ul>
+	
+	</div>
+
+	
+	<div class="articulos">
+	
+		{% for contenido in contenidos %}
+			<article>
+
+				<div class="img_wrapper">
+					<a href="{{contenido.fecha_de_publicacion|date:"Y/m/d"}}/{{contenido.pk}}"><img src="/media/{{contenido.portada}}"></a>
+				</div>
+				<h4 class="titulo">
+					<a href="{{contenido.fecha_de_publicacion|date:"Y/m/d"}}/{{contenido.pk}}">	{{contenido.titulo|title}}
+					</a>
+				</h4>
+				<ul class="acerca">
+					<li><span class="icon-clock"></span></li>
+					<li><span >{{contenido.fecha_de_publicacion}}</span></li>
+					<li><span class="icon-user"></span></li>
+					<li><span >{{contenido.author}}</span></li>
+				</ul>
+
+				<p class="descripcion text-justify">
+					{{contenido.contenido|safe|striptags|slice:":220"}}...
+					
+					<a  href="{{contenido.fecha_de_publicacion|date:"Y/m/d"}}/{{contenido.pk}}">Leer mas</a>
+				</p>
+				<!--<a class="btn_more" href="{{contenido.pk}}">Leer mas</a>-->
+			</article>
+		{%endfor%}
+
+		<div class="pagination">
+		   	
+			<ul class="step-links">
+				{% if contenidos.has_previous %}
+				          <li>
+				          	  <a href="?page={{ contenidos.previous_page_number }}" class="anterior">Anterior</a>
+				          </li>
+				{% endif %}
+
+				{% for i in lista  %}
+					<a href="?page={{i}}" class="num btn btn-default">{{i}}</a></span>
+					
+				{% endfor %}
+				<li>
+					<span class="current">
+					           Pagina {{ contenidos.number }} de {{ contenidos.paginator.num_pages }}.
+					</span>
+				</li>
+				
+				{% if contenidos.has_next %}
+				      <li>
+				      	<a href="?page={{ contenidos.next_page_number }}" class="siguiente">siguiente</a>
+				      </li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+	
+	
+	
+	{%comment%}
+	Paginator objects¶
+	
+	The Paginator class has this constructor:
+	
+	class Paginator(object_list, per_page, orphans=0, allow_empty_first_page=True)[fuente]¶
+	Re
+	{%endcomment%}
+	
+	<style type="text/css">
+		.blog{
+			border: 2px solid black;
+			margin: 1%;
+			background: #dca;
+		}
+	</style>
+</section>
+{%endblock%}

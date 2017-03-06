@@ -1,0 +1,10 @@
+{%extends 'index.html'%}
+{%block section%}
+<section>
+<ul> 
+	    {% for publicacion in latest %} 
+	        <li>{{ publicacion.fecha_de_publicacion }}: {{ publicacion.titulo }}</li> 
+	    {% endfor %} 
+	</ul> 
+</section>
+{%endblock%}

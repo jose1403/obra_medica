@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+
+
+{% block section %}
+<section>
+	<h1>Entradas del año</h1>
+	    <h3> Entradas del año:
+	
+	{% for entrada in entradas %}
+	
+	    {% ifchanged %}{{entrada.fecha_de_publicacion|date:"Y"}}</h3>{% endifchanged %}
+	
+	   <li> {{ forloop.counter }}<a href="{{entrada.fecha_de_publicacion|date:"n/d"}}/{{entrada.pk}}">
+	{{ entrada }}</a></li>
+	{% endfor %}
+	   </ul>
+</section>
+
+{% endblock section%}

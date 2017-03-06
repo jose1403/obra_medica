@@ -1,0 +1,24 @@
+{%extends 'index.html'%}
+{%block section%}
+<section>
+{{numero}}
+	{}{{meses}}
+	{{nombre}}
+	
+		<h1>{{mes|title}}</h1>
+	
+	{%for articulo in articulos%}
+	
+	<article>
+		<div class="col-md-12">
+		<h3>{{articulo.titulo}}</h3>
+		<span>author:{{articulo.author}} </span>
+		<span>{{articulo.fecha_de_publicacion}}</span>
+			
+		</div>
+	    
+	</article>
+	 {%endfor%}
+	<br> 
+</section>
+{%endblock%}

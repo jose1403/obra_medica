@@ -1,0 +1,131 @@
+
+{%extends "index.html"%}
+{%load staticfiles%}
+{%block  style%}
+	<link rel="stylesheet" href="{%static 'css/inicio.css'%}">
+{%endblock style%}
+	
+{%block script%}
+	<script src="{%static 'js/inicio.js'%}"></script>
+{%endblock script%}
+
+
+{%block section%}
+<section>
+
+	<div class="inicio">
+		<div class="slideshow " id="slideshow" >
+			<div class="botones">
+				<span class="icon-previous" id="previous"></span>
+				<span class="icon-next" id="next"></span>
+			</div>
+			{% for contenido in contenidos %}
+				<div class="item">
+					<img src="/media/{{contenido.portada}}" >
+					<h4 class="content">
+					       <a href="/articulos/{{contenido.fecha_de_publicacion|date:"Y/m/d"}}/{{contenido.pk}}">{{contenido.titulo|title}}</a>
+					</h4>
+				</div>
+			{%endfor %}
+		</div>
+		
+		<div class="articulos">
+			<h2 class="titulo">Articulos  recientess {{name}}</h2>
+			{% for contenido in contenidos %}
+				
+				<article>
+					<div class="img_wrapper">
+						<a href="/articulos/{{contenido.fecha_de_publicacion|date:"Y/m/d"}}/{{contenido.pk}}">
+							<img src="/media/{{contenido.portada}}" >
+						</a>
+						<h4 class="titulo">
+					              <a href="/articulos/{{contenido.fecha_de_publicacion|date:"Y/m/d"}}/{{contenido.pk}}">{{contenido.titulo|title}}</a>
+						</h4>	
+					</div>
+					<!-- <span>Publicado el {{contenido.fecha_de_publicacion|date:"j F Y"}}</span> -->
+					<!-- <br> <span>Por {{contenido.author}}</span> <br> -->
+					<!-- <p class="parrafo">{{contenido.contenido|safe|striptags|slice:":200"}}</p> -->
+				</article>
+							
+					
+				
+					{%comment%}
+				<b>
+					aqui ={{contenido.titulo|pprint}}
+				</b>
+				{%endcomment%}
+			{%endfor%}
+		</div>
+	</div>
+	
+	<div class="productos">
+		
+			
+		
+		<h2 class="titulo">Conoce Nuestros Productos</h2>
+		<div class="about_pro">
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque commodi doloremque nihil voluptas amet reprehenderit assumenda nemo. Inventore cupiditate dolores ducimus assumenda consectetur id quam, dignissimos obcaecati velit porro, sunt!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque commodi doloremque nihil voluptas amet reprehenderit assumenda nemo. 
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque commodi doloremque nihil voluptas amet reprehenderit assumenda nemo. Inventore cupiditate dolores ducimus assumenda consectetur id quam, dignissimos obcaecati velit porro.
+			</p>
+		</div>
+
+		<div class="productos_wrapper">
+		{% for producto in get_productos_nuevos %}
+			<article>
+				<div class="img_wrapper">
+					<a href="{{producto.get_absolute_url}}"><img src="/media/{{producto.imagen}}"></a>
+				</div>
+				<p class="nombre"><a href="{{producto.get_absolute_url}}">{{producto.nombre|title}}</a></p>
+				<p class="descripcion text-justify">
+					{{producto.descripcion|safe|striptags|slice:":220"}}...
+					<a href="{{producto.get_absolute_url}}"> Leer Más</a>
+				</p>
+			</article>
+			{%endfor%}
+			
+			<a href="{%url 'productos'%}">Ver Más Productos</a>
+		</div>
+		
+	</div>
+	<div class="testimonios" >
+		<h2 class="titulo">Testimonios</h2>
+
+		<div class="about">
+			<p class="text-justify">
+				La medicina natural es la práctica terapéutica que pretende conseguir el alivio o curación de las enfermedades por medio de los productos provenientes directamente de la naturaleza, sin síntesis y con escasa o nula manipulación. La medicina natural utiliza, principalmente, productos vegetales y minerales, los cuales, bien usados directamente o mediante preparación previa, en uso tópico o por ingestión, permiten suministrar al organismo sustancias útiles en el tratamiento de las enfermedades.
+			</p>
+		</div>
+		
+		<div class="testimonios_wrapper">
+			{% for testimonio in get_testimonios_recientes %}	
+				<div class="item">
+					<div class="img_wrapper">
+						<a href="{{testimonio.get_absolute_url}}"><img src="/media/{{testimonio.imagen}}" ></a>
+					</div>
+					<p class="nombre"><a href="{{testimonio.get_absolute_url}}">{{testimonio.nombre|title}}</a></p>
+					<p class="paciente">{{testimonio.paciente|title}}</p>
+					<p class="fecha">{{testimonio.fecha_de_consulta|date:"d/m/y"}}</p>
+					<p class="text-justify text-left">{{testimonio.testimonios|safe|striptags|slice:"250"}}...</p>
+				</div>
+			{%empty%}
+			<div>
+				<p>No Hay testimonios que mostrar</p>
+			</div>
+			{% endfor %}
+		</div>
+		
+	</div>
+
+ 
+{% for date in days %} 
+    {% ifchanged %}<h3>{{ date|date:"F" }}</h3>{% endifchanged %} 
+        <a href="{{ date|date:"M/d"|lower }}/">{{ date|date:"j" }}</a> 
+{% endfor %}
+
+
+	
+</section>
+{%endblock section%}
+
+{%block aside%}{%endblock aside%}

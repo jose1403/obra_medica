@@ -1,0 +1,56 @@
+{%extends 'index.html'%}
+{%load staticfiles%}
+	<link rel="stylesheet" href="{%static 'css/articulos.css'%}">
+{%block section%}
+
+<div class="articulos videos col-md-12" style="overflow: hidden;">
+<h2 class="">Video</h2>
+<div class="col-md-2"></div>
+{%for i in videos_p%}
+	<h3>{{i.titulo}}</h3>
+	<div class="envebido col-md-8" 	>
+	<iframe width="100%" height="369" src="https://www.youtube.com/embed/{{i.ids}}" frameborder="3" allowfullscreen margin="20px">
+		
+	</iframe>
+	</div>
+{%endfor%}
+
+</div>
+<br>
+<hr>
+<br>
+<div margin="5px">
+<div id="disqus_thread" margin="2px"></div>
+<script id="dsq-count-scr" src="//obra-medica-natural.disqus.com/count.js" async></script>
+
+</div>
+<br>
+<br>
+<br>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://obra-medica-natural.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<style>
+	aside{
+		display:none;
+
+	}
+</style>
+{%endblock%}

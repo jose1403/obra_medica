@@ -1,0 +1,59 @@
+{%extends 'index.html'%}
+{%block style%}
+	{%load staticfiles%}
+
+	<link rel="stylesheet" href="{%static 'css/articulos.css'%}">
+{%endblock style%}
+{%block section%}
+<section>
+
+
+
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><span>Testimonios</span></li>
+
+		</ul>
+	
+	</div>
+<div class="articulos">
+
+	<hr>
+		{%for testimonio in testimonios%}
+		<article>
+
+				<div class="img_wrapper">
+					<a href="{{testimonio.pk}}"><img src="/media/{{testimonio.imagen}}"></a>
+				</div>
+				<h4 class="titulo">
+					<a href="{{testimonio.pk}}">{{testimonio.nombre|title}}
+					</a>
+				</h4>
+				<ul class="acerca">
+					<li><span class="icon-clock"></span></li>
+					<li><span >{{testimonio.fecha_de_consulta}}</span></li>
+					<li><span class="icon-user"></span></li>
+					<li><span >{{testimonio.paciente}}</span></li>
+				</ul>
+
+				<p class="descripcion text-justify">
+					{{testimonio.testimonio|safe|striptags|slice:":100"}}...
+					
+					<a  href="{{testimonio.pk}}">Leer mas</a>
+				</p>
+				<!--<a class="btn_more" href="{{contenido.pk}}">Leer mas</a>-->
+			</article>
+
+			
+	
+		
+		{%empty%}
+		<article><h2>no hay testimonios que mostrar</h2></article>
+		{%endfor%}
+	
+	</div>
+	
+</section>
+{%endblock%}

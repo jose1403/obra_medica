@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{%load staticfiles%}
+{%block title%}
+{%endblock title%}
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/articulo.css'%}">
+{%endblock style%}
+{% block section %}
+<section>
+
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><a href="">Perfil</a></li>
+			<li><span>></span></li>
+
+			<li><a href="">{{get_author|title}}</a></li>
+
+			
+		</ul>
+	</div>
+	
+	<div class="contenido_articulo" style="font-size:20px">
+	<br>
+	<center> <h2>{{request.user.username|title}} <img class="img" src="/media/{{get_author.foto}}" alt="foto-perfil" width="40px"></h2></center> <hr>
+
+	<p>Nombre : {{get_author.nombre|title}} </p>  <br>
+	<p>Apellido : {{get_author.apellido|title}} </p><br>
+	<p>Imagen : <br> <img src="/media/{{get_author.foto}}" alt="foto-perfil" width="200px"> </p>
+	<p>Contactos : Correo - <a href="">{{get_author.correo}}</a>, Telefono - <a href="">{{get_author.telefono}}</a>  </p>
+	<p>Acerca de mi : <br> {{get_author.descripcion|upper}} </p>
+
+	</div>
+	</section>
+
+{%endblock%}

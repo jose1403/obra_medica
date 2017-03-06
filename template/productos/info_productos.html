@@ -1,0 +1,49 @@
+{%extends 'index.html'%}
+{%load staticfiles%}
+
+{%block title%}
+	{%for producto in productos%}
+		{{producto.nombre}} |
+	{%endfor%}
+{%endblock title%}
+
+
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/info_producto.css'%}">
+{%endblock style%}
+
+{%block section%}
+<section>
+
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><a href="{%url 'productos'%}">Productos</a></li>
+			<li><span>></span></li>
+			<li>
+				<span>
+				{%for producto in productos%}
+						{{producto.nombre}}
+					{%endfor%}
+				</span>
+			</li>
+		</ul>
+	</div>
+	<div class="producto">
+		
+		{%for producto in productos%}
+			
+			<article >
+				<div class="img_wrapper">
+					<img src="/media/{{producto.imagen}}" width="10%">
+				</div>
+				<h2 class="nombre">{{producto.nombre}}</h2>
+				<p class="descripcion text-justify">{{producto.descripcion|safe|striptags}}</p>
+			</article>
+			
+		{%endfor%}
+	</div>
+	
+</section>
+{%endblock%}

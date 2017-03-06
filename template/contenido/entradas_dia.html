@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{%load staticfiles%}
+
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/entradas_dia.css'%}">
+{%endblock style%}
+
+{% block cabezera %}miblog|{{ day|date }}{% endblock %}
+
+{% block section %}
+ <section>
+ 	   <h3> Entradas del día:
+ 	{% for entrada in entradas %}
+ 	
+ 	{% ifchanged %}{{entrada.fecha_de_publicacion|date:"d  M  Y"}}</h3>{% endifchanged %}
+ 	
+ 	<li> {{ forloop.counter }}<a href="{{entrada.pk}}">
+ 	{{ entrada }}</a></li>
+ 	{% endfor %}
+ 	</ul>
+ </section>
+{% endblock %}

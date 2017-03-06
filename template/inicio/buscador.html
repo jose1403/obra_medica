@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+{% block section %}
+{%load staticfiles%}
+
+{%block  style%}
+	<link rel="stylesheet" href="{%static 'css/buscador.css'%}">
+{%endblock style%}
+{%block script%}
+	<script src="{%static 'js/buscador.js'%}"></script>
+{%endblock script%}
+
+
+<section>
+
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><span>Resultados de Busqueda</span></li>
+		</ul>
+	</div>
+
+	<div class="resultados">
+
+	
+		<div class="modulos">
+			<ul>
+				<li>
+					<span id="btnArticulos" > {{numero_pub}} Articulos Encontrados</span>
+				</li>
+				<li>
+					<span id="btnProductos">{{numero_pro}}  Productos Encontrados</span>
+				</li>
+			</ul>
+		</div>
+		<div class="resultado_modulos">
+			<div class="articulos" id="articulos">
+				{% for contenido in publicaciones %}
+				
+					<article>
+						<div class="img_wrapper">
+							<a href="">
+								<img src="/media/{{contenido.portada}}" alt="Media Object">                   
+							</a>
+						</div>
+						<h4 class="titulo"><a href="/articulos/{{contenido.pk}}">{{contenido.titulo|title}}</a></h4>
+						<p class="short_content">{{contenido.contenido|safe|striptags|slice:":200"}}</p>
+					</article>
+					<hr>
+				{%empty%}
+					<h2 >Lo sentimos no se encontraron Publicaciones</h2>
+				{% endfor %}
+			</div>
+
+			<div class="productos" id="productos">
+				{%for producto in productos%}
+					<article>
+						<div class="img_wrapper">
+							<a href="{{producto.pk}}"><img src="/media/{{producto.imagen}}" width="10%"></a>
+						</div>
+						<h4 class="titulo"><a href="{{producto.pk}}">{{producto.nombre}}</a></h4>
+						<p>
+							{{producto.descripcion|safe|striptags|slice:":304"}}...
+							<a href="{{producto.pk}}">Mas informacion</a>
+						</p>
+					</article>
+					<hr>	
+				{%empty%}
+					<h2>Lo sentimos no se encontraron Productos</h2>
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+
+</section>
+{% endblock section %}

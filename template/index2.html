@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>natural</title>
+	{%load staticfiles%}
+	 <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %} ">
+	  	<link rel="stylesheet" href="{% static "js/jqery-ui/jquery-ui.min.css" %}">
+	    <script src="{% static "js/jquery.js"%}"></script>
+	    <script src="{% static "js/jqery/jquery-ui.js" %} "></script>
+     <script src="{% static "bootstrap/js/bootstrap.min.js" %} "></script>
+</head>
+<body>
+{%block cabesera%}
+{%load staticfiles%}
+<header class="cabesera jumbotron " style="background:url('{%static "imagenes/page.jpeg"%}')">
+			{% if request.user.is_authenticated %}
+			<div id="perfil" class="col-md-4">
+				<div class="contenedor-user media clearfix">
+				<a class="pull-left" href="#">
+				<img src="{{get_image_profile}}" class="img-circle media-object imagen-usuario" alt="user" width="60px"/></a>
+				<div class="media-body">
+				<h2><a href="{% url 'perfildeusuario' %}">{{user.first_name}} {{user.last_name}}</h2>
+				</div>
+				
+						<span class="secion"><a href="{%url 'logout'%}" class="btn btn-danger">cerrar secion</a></span>
+					
+					{% endif %}
+				</div>
+			</div>
+			<style>
+		#perfil{
+			background:rgba(20,33,7,0.4);
+			float: right;
+			border:solid 1px white;
+			margin: 2px;
+			
+		}
+		.contenedor-user{
+			width:100%;
+
+		}
+		.imagen-usuario{
+			
+			float:right;
+		}
+		.nombre-usuario{
+			position: absolute;
+		}
+		.nombre-usuario a{
+			
+		}
+		.secion{
+			float: bottom;
+		
+		}
+
+	</style>
+				<h1 class="">Centro Naturista</h1>
+			
+	
+				<a style="float:right" href="/admin" class="btn btn-default" >admin</a>
+				
+				{%load staticfiles%}
+				<style type="text/css">
+				
+				header{
+					background: url('{%static "imagenes/page.jpeg"%}');
+				}
+				</style>
+		<div class="" id="buscar" margin="2px" style="position:absolute;">
+		    <div class="input-group col-md-3 buscar" style="float:right;">
+		      <span class="input-group-btn">
+
+		        <input class="btn btn-default" type="submit" form="buscador">&
+		      </span>
+		      <form class="bs-example bs-example-form" role="form" method="GET" id="buscador" action="/buscador/">
+				
+		      <input type="search" class="form-control buscador" placeholder="buscar" name="buscar">
+		      </form>
+		  </div>
+		  </div>
+	
+
+		<!--codico de agrandado del Buscador-->
+		<script>
+			$(document).ready(buscador);
+
+			function buscador(){
+
+				var x= $('.buscador');
+	
+				x.focus(agrandar);
+				x.focusout(minimizar);
+				
+				
+				/*if (i.) {};
+				
+				*/
+
+			}
+			function agrandar(){
+			var x= $('.buscar');
+			x.removeClass('col-md-1');
+			x.addClass('col-md-3');
+		
+			}
+			function minimizar(){
+				var x= $('.buscar');
+				x.removeClass('col-md-3');
+				x.addClass('col-md-1');
+			}
+			
+		</script>
+
+
+			</header>
+
+
+			<nav class="navbar navbar-inverse navegacion" id="nav" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Centro Naturista</a>
+				</div>
+
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav" id="navegacion">
+							<li><a href="{%url 'inicio'%}" class="active">Inicio</a></li>
+							<li><a href="{%url 'productos'%}">Productos</a></li>
+							<li><a href="{%url 'articulos'%}">Articulos</a></li>
+							<li><a href="{%url 'conocenos'%}">Conosenos</a></li>
+							<li><a href="{%url 'contactanos'%}">Contactanos</a></li>
+							<li><a href="#">Ayuda</a></li>
+							<li><a href="#">usuario</a></li>
+
+						</ul>
+					
+					
+						
+					</div>
+					
+			</nav>
+
+
+	
+			
+{%endblock cabesera%}
+<div class="container">
+	<div class="row">
+	<aside class="aside col-md-3">
+		{%block aside%}
+<div class="row">
+
+<h3>LO QUE BUSCAS</h3>
+
+<ul>
+	<li style="list-style:none;">
+		<a href="#" class=" text-danger" >Productos</a>
+	</li>
+		<li style="list-style:none;" class=" text-danger">
+			<a href="{%url 'testimonios'%}">Testimonios</a>
+		</li>
+		<li style="list-style:none;" class=" text-danger">
+			<a href="#">Contactanos</a>
+		</li>
+</ul>
+
+	{% load etiquetas %}
+	{% cal_mes %}
+</div><!--row aside 1-->
+<h3>Productos nuevos</h3>
+{%for producto in get_productos_nuevos%}
+<b>{{producto.nombre}}</b><br>
+
+{%endfor%}
+{%endblock aside%}
+	</aside>
+	<section class="section col-md-9">
+	<style type="text/css">
+		.aside{
+			border: solid blue 2px;
+			height: 400px;
+		}
+		.section{
+			border: solid red 2px;
+			
+		}
+		.footer{
+			border: solid green 2px;
+			height: 100px;
+		}
+
+	</style>
+
+		{%block section%}
+
+		<h1>Seccion</h1>
+		{%endblock section%}
+	</section>
+
+		
+	</div><!---row principal-->
+	<div class="row row-footer">
+		<footer class="footer">
+			{%block footer%}
+			Footer
+			{%endblock footer%}
+		</footer>
+	</div><!--fin row footeer
+</div><!-- Fin de concatainer -->
+</body>
+</html>

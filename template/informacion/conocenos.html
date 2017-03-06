@@ -1,0 +1,93 @@
+{%extends 'index.html'%}
+{%load staticfiles%}
+
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/conocenos.css'%}">
+{%endblock style%}
+
+{%block section%}
+<section>
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><span>Conocenos</span></li>
+		</ul>
+	</div>
+	<div class="conocenos">
+		{%for i in informacion%}
+		<div class="nosotros">
+			<h2 class="titulo">Nosotros</h2>
+			
+			<p>
+				{{i.quienes_somos}}
+			</p>
+			
+			
+		</div>
+
+		<div class="mision">
+			<h2 class="titulo">Misión</h2>
+			<p>
+				{{i.mision}}
+				
+			</p>
+		</div>
+		<div class="vision">
+			<h2 class="titulo">Visión</h2>
+			<p>
+				{{i.vision}}
+				
+			</p>
+		</div>
+		<div class="localizacion">
+			<h2 class="titulo">Localización</h2>
+			<p>
+				{{i.ubicacion}}
+				
+			</p>
+		</div>
+
+			{%empty%}
+
+	<div class="nosotros">
+			<h2 class="titulo">Nosotros</h2>
+			
+			<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat enim odit labore, repellendus dolores, esse itaque ipsum ullam similique dolorem, eum recusandae ratione fuga officiis in accusantium exercitationem molestiae impedit.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, adipisci cupiditate illum expedita doloremque facilis, obcaecati iure, ipsa saepe aliquid, quia voluptatum voluptatem nobis minima culpa nulla libero ut corrupti.
+				
+			</p>
+	
+		</div>
+
+		<div class="mision">
+			<h2 class="titulo">Misión</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat enim odit labore, repellendus dolores, esse itaque ipsum ullam similique dolorem, eum recusandae ratione fuga officiis in accusantium exercitationem molestiae impedit.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, adipisci cupiditate illum expedita doloremque facilis, obcaecati iure, ipsa saepe aliquid, quia voluptatum voluptatem nobis minima culpa nulla libero ut corrupti.
+				
+			</p>
+		</div>
+		<div class="vision">
+			<h2 class="titulo">Visión</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat enim odit labore, repellendus dolores, esse itaque ipsum ullam similique dolorem, eum recusandae ratione fuga officiis in accusantium exercitationem molestiae impedit.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, adipisci cupiditate illum expedita doloremque facilis, obcaecati iure, ipsa saepe aliquid, quia voluptatum voluptatem nobis minima culpa nulla libero ut corrupti.
+				
+			</p>
+		</div>
+		<div class="localizacion">
+			<h2 class="titulo">Localización</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat enim odit labore, repellendus dolores, esse itaque ipsum ullam similique dolorem, eum recusandae ratione fuga officiis in accusantium exercitationem molestiae impedit.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, adipisci cupiditate illum expedita doloremque facilis, obcaecati iure, ipsa saepe aliquid, quia voluptatum voluptatem nobis minima culpa nulla libero ut corrupti.
+				
+			</p>
+		</div>
+		{%endfor%}
+
+	</div>
+	
+</section>
+{%endblock%}

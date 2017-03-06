@@ -1,0 +1,41 @@
+{%extends 'index.html'%}
+{%load staticfiles%}
+{%block style%}
+	<link rel="stylesheet" href="{%static 'css/productos.css'%}">
+{%endblock style%}
+
+{%block section%}
+<section >
+	<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><span>Productos</span></li>
+		</ul>
+	</div>
+	<div class="productos">
+		
+		{%for producto in productos%}
+			<article>
+				<div class="img_wrapper">
+					<a href="{{producto.pk}}"><img src="/media/{{producto.imagen}}"></a>
+				</div>
+				
+				<h2 class="nombre">
+					<a href="{{producto.pk}}">{{producto.nombre|title}}</a>
+				</h2>
+				<p class="descripcion text-justify">
+					{{producto.descripcion|safe|striptags|slice:":220"}}... 
+					<a href="{{producto.pk}}" >Mas informacion</a>
+				</p>
+			</article>
+				{%empty%}
+			<article>
+				<h2>Lo sentimos no hay productos que mostrar</h2>
+			</article>
+		{%endfor%}
+	
+	</div>
+</section>
+
+{%endblock%}

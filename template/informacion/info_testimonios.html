@@ -1,0 +1,40 @@
+{%extends 'index.html'%}
+{%block style%} 
+	{%load staticfiles%}
+
+	<link rel="stylesheet" href="{%static 'css/articulo.css'%}">
+
+{%endblock style%}
+{%block section%}
+<section>
+	<div class="contenido_articulo" style="margin-left: 3px>
+	<hr>
+		{%for testimonio in testimonios%}
+		<article>
+
+				<h4 class="titulo">
+					{{testimonio.nombre|title}}
+					</h4>
+				<ul class="acerca">
+					<li><span class="icon-clock"></span></li>
+					<li><span >{{testimonio.fecha_de_consulta}}</span></li>
+					<li><span class="icon-user"></span></li>
+					<li><span >{{testimonio.paciente}}</span></li>
+				</ul>
+				</article>
+
+		<article>
+			<p class="contenido">
+				{{testimonio.testimonios}}
+			</p>
+		</article>
+		<hr>
+		<b>Observaciones:</b> <br>
+		<p>{{testimonio.observaciones}}</p>
+		
+		{%endfor%}
+	
+	</div>
+	
+</section>
+{%endblock%}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>{%block title%}{%endblock title%}Crecer Obra Medica Natural</title>
+
+	{%load staticfiles%}
+	<link rel="stylesheet" href="{%static 'css/main.css'%}">
+	<link rel="stylesheet" href="{%static 'css/icommon.css'%}">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+	{%block style%}{%endblock style%}
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="{%static 'js/main.js'%}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	{%block script%}{%endblock script%}
+	
+</head>
+<body>
+	<div class="global_wrapper">
+		<header >
+			<div class="header_row_1">
+				<ul class="social_wrapper">
+					<li><a href=""><span class="icon-facebook"></span></a></li>
+					<li><a href=""><span class="icon-twitter"></span></a></li>
+					<li><a href=""><span class="icon-google-plus"></span></a></li>
+					<li><a href=""></a></li>
+					<!-- {% if request.user.is_authenticated %}
+						<li><a href="">{{request.user|title}}</a></li>
+						<li><a href="/admin/">Administracion</a></li>
+						<li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+					{% endif %} -->
+				</ul>
+				<div class="admin">
+
+					{% if request.user.is_authenticated %}
+					{%load staticfiles%}
+						<div class="img_wrapper" ><img src="media/{{get_author.foto}}" alt=""></div>
+						<span class="nombre" id="nombre_admin">
+							{{request.user|title}}
+							<ul class="opciones" id="opciones_admin">
+								<span class="arrow"></span>
+								<li><a href="{%url 'perfil-author'%}"><span class="icon-user"></span>Perfil</a></li>
+								<li><a href="/admin/"><span class="icon-pencil"></span>Administración</a></li>
+								<li><a href="{% url 'logout' %}"><span class="icon-exit"></span>Cerrar Sesión</a></li>
+							</ul>
+						</span>
+						
+					{% endif %}
+				</div>
+<!--media/imagenes/usuario/IMG_20170105_064709.jpg-->
+<!--media/imagenes/usuario/IMG_20170105_064709.jpg-->
+				<div class="buscador">
+					<form  class="form-linear" role="form" method="GET"  action="/buscador/">
+						<div class="input-group">
+							<input type="search" placeholder="Buscar..." name="buscar">
+							<span class=" icon-search input-group-addon"></span>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="header_row_2">
+				<img src="" alt="">
+				<h1>Crecer Obra Medica Natural</h1>	
+			</div>
+		</header>
+		
+		<nav>
+			<div class="nav_movil">
+				<div class="buscador_movil">
+					<form role="form" method="GET"  action="/buscador/">
+						<input type="search" placeholder="Buscar..." name="buscar">
+					</form>
+				</div>
+				<span class="icon-menu"></span>
+			</div>
+
+			<ul class="nav_principal">
+				<li><a href="{%url 'inicio'%}" class="active">Inicio</a><span></span></li>
+				<li><a href="{%url 'productos'%}">Productos</a><span></span></li>
+				<li><a href="{%url 'articulos'%}">Articulos</a><span></span></li>
+				<li><a href="{%url 'lista_videos'%}">Videos</a><span></span></li>
+				<li><a href="{%url 'conocenos'%}">Conocenos</a><span></span></li>
+				<li><a href="{%url 'contactanos'%}">Contactanos</a><span></span></li>
+			</ul>
+		</nav>
+
+		{%block section%}
+			<section></section>	
+		{%endblock section%}
+			
+		{%block aside%}
+			<aside>
+				<div class="siguenos">
+					<h4 class="titulo">Siguenos En las Redes Sociales</h4>
+					<div class="redes">
+						<a href=""><span class="icon-facebook"></span></a>
+						<a href=""><span class="icon-twitter"></span></a>
+						<a href=""><span class="icon-google-plus"></span></a>
+					</div>
+				</div>
+				<div class="articulos_recientes">
+					<h4 class="titulo">Articulos Recientes</h4>
+					{% for articulo in get_publicaciones_recientes  %}
+						
+					
+					<article>
+						<div class="img_wrapper_art">
+							<a href=""><img src="/media/{{articulo.portada}}" alt=""></a>
+						</div>
+						<h4 class="titulo"><a href="{{articulo.get_absolute_url}}">{{articulo.titulo|title}}</a></h4>	
+					</article>
+					{%empty%}
+					<article>
+						<div class="img_wrapper_art">
+							<a href=""><img src="/imagenes/re.jpg" alt=""></a>
+						</div>
+						<h4 class="titulo"><a href="#">No Hay Articulos Nuevos</a></h4>	
+					</article>
+					{% endfor %}
+					
+
+				</div>
+				<div class="conoce_productos">
+					<h4 class="titulo">Conoce Nuestros Productos</h4>
+					{% for producto in get_productos_nuevos  %}
+					<article>
+						<div class="img_wrapper_pro">
+							<a href="{{producto.get_absolute_url}}"><img src="/media/{{producto.imagen}}" alt=""></a>
+						</div>
+						<h4 class="titulo"><a href="{{producto.get_absolute_url}}">{{producto.nombre|title}}</a></h4>
+					</article>
+					{%empty%}
+					<article>
+						<div class="img_wrapper_art">
+							<a href=""><img src="/imagenes/re.jpg" alt=""></a>
+						</div>
+						<h4 class="titulo"><a href="#">No Hay Productos Nuevos</a></h4>	
+					</article>
+					{% endfor %}
+				</div>
+				<!-- <div class="calendario">
+					{% load etiquetas %}
+					{% cal_mes %}
+				</div> -->
+			</aside>
+		{%endblock aside%}	
+
+		{%block footer%}
+			<footer style="margin-top: 2px">
+		<center>
+			<li style="list-style: none;color:white;font-size:20px">Crecer Obra Medica Natural</li></center>
+
+			<ul style="text-decoration:none;font-size:15px; margin-left:20px;color:rgb(22, 246, 214) "><li style="list-style: none;text-decoration:none;"><a href="{%url 'testimonios'%}" >Testimonios</a> </li>
+			<li style="list-style: none;"><a href="{%url 'productos'%}">Nuestros Productos</a></li>
+			<li style="list-style: none;"><a href="{%url 'conocenos'%}">Conocenos</li></ul>
+			
+			<div>
+			<ul class="social_wrapper" style="">
+					<li><a href=""><span class="icon-facebook"></span></a></li>
+					<li><a href=""><span class="icon-twitter"></span></a></li>
+					<li><a href=""><span class="icon-google-plus"></span></a></li>
+					<li><a href=""></a></li>
+					<!-- {% if request.user.is_authenticated %}
+						<li><a href="">{{request.user|title}}</a></li>
+						<li><a href="/admin/">Administracion</a></li>
+						<li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+					{% endif %} -->
+				</ul>
+
+			</div>
+			<h4 class="titulo" style="font-size: 12px; color:rgb(22, 246, 214); float: right; margin-right:10px">Creado por <b>DITS</b> "Desarrollo Integral Tecnologico de Software"</h4>
+			</footer>
+		{%endblock footer%}
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="{%static 'js/main.js'%}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</div>
+</body>
+</html>

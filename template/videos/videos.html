@@ -1,0 +1,78 @@
+{%extends 'index.html'%}
+{%block style%}
+{%load staticfiles%}
+	<link rel="stylesheet" href="{%static 'css/articulos.css'%}">
+
+{%endblock style%}
+{%block section%}
+<div class="migas">
+		<ul>
+			<li><a href="{%url 'inicio'%}">Inicio</a></li>
+			<li><span>></span></li>
+			<li><a href="">Videos</a></li>
+		
+
+			
+		</ul>
+	</div>
+
+
+<div class="articulos col-md-8">
+	
+		{% for valores in canal %}
+			<article>
+
+				<div class="img_wrapper">
+				{%for i in valores.media%}
+				
+					<a href="{{valores.url}}"><img src="{{i.url}}" ></a> {%endfor%}
+				</div>
+				<h4 class="titulo">
+					<a href="{{valores.url}}">{{valores.titulo}}</a>
+					</a>
+				</h4>
+				
+
+				<!--<a class="btn_more" href="{{contenido.pk}}">Leer mas</a>-->
+			</article>
+		{%endfor%}
+
+		<div class="pagination">
+		   	
+			<ul class="step-links">
+				{% if contenidos.has_previous %}
+				          <li>
+				          	  <a href="?page={{ contenidos.previous_page_number }}" class="anterior">Anterior</a>
+				          </li>
+				{% endif %}
+
+				{% for i in lista  %}
+					<a href="?page={{i}}" class="num btn btn-default">{{i}}</a></span>
+					
+				{% endfor %}
+				<li>
+					<span class="current">
+					           Pagina {{canal.number}} de {{ canal.paginator.num_pages }}.
+					</span>
+				</li>
+				
+				{% if contenidos.has_next %}
+				      <li>
+				      	<a href="?page={{ contenidos.next_page_number }}" class="siguiente">siguiente</a>
+				      </li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+	
+<br>
+<br>
+<br>
+
+
+<!---
+ejemplo == <h3>{{canal}}</h3> 
+{{las}}
+<br>
+var = var-->
+{%endblock%}

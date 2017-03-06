@@ -1,0 +1,21 @@
+
+<table class="cal_mont_caendar" border="1px solid">
+	<h2>entradas del mes de {{fecha|date:"F Y"}} <br></h2>
+	<tr>
+		{%for dia in encabesado%}
+			<th>{{dia|date:"D"|slice:"3"}}</th>
+
+		{%endfor%}
+	</tr>
+
+	{%for semana in calendario%}
+	<tr>
+		{%for dia in semana%}
+
+		<td{%if not dia.en_mes%} class="cal_not_in_month"{%endif%} >{%if dia.evento %}<a href="/articulos/{{dia.dia|date:"Y/m/d"}}">{{dia.dia|date:"j"}}</a>{%else%}{{dia.dia|date:"j"}}{%endif%}</td>
+		{%endfor%}
+	</tr>
+	{%endfor%}
+</table>
+
+
