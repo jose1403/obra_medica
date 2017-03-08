@@ -37,7 +37,7 @@ else:
 ADMINS = ( 
 ('Jose Suarez', 'josegregorio1403@gmail.com'),  
 ) 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['159.203.139.111']
 
 
 # Application definition
