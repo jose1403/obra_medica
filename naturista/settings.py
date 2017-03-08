@@ -23,7 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@um9m%u%p@-)n4f(c=exa^sgmqow-l3anj4j=+0x16b!f#ruh1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+import socket 
+ 
+if socket.gethostname() == 'pandora': 
+   DEBUG = TEMPLATE_DEBUG = True 
+   DEBUG = True
+else: 
+    DEBUG = TEMPLATE_DEBUG = False 
+    DEBUG = False
+
+
 #TEMPLATE_DEBUG = False
 ADMINS = ( 
 ('Jose Suarez', 'josegregorio1403@gmail.com'),  

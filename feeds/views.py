@@ -78,7 +78,7 @@ class PublicacionesPorMesFeed(Feed):
 	pass
 
 def lista_videos(request):
-    canal = "https://www.youtube.com/feeds/videos.xml?channel_id=UCNb9u6hcQ0wTX-pWDC1DR0w"
+    canal = "https://www.youtube.com/feeds/videos.xml?channel_id=UCsVl4Ztbfv-GdsiTb-RH52A"
     #mi_feed= "http://127.0.0.1:8000/rss/adjuntos/"
     try:
 
@@ -150,7 +150,7 @@ def lista_videos(request):
 
 
 def video_publicado(request, titulo):
-    canal = "https://www.youtube.com/feeds/videos.xml?channel_id=UCNb9u6hcQ0wTX-pWDC1DR0w"
+    canal = "https://www.youtube.com/feeds/videos.xml?channel_id=UCsVl4Ztbfv-GdsiTb-RH52A"
     feed = feedparser.parse(canal)
 
     #feed2= feedparser.parse(mi_feed)
