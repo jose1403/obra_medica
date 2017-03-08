@@ -29,8 +29,8 @@ if socket.gethostname() == 'pandora':
    DEBUG = TEMPLATE_DEBUG = True 
    DEBUG = True
 else: 
-    DEBUG = TEMPLATE_DEBUG = False 
-    DEBUG = False
+    DEBUG = TEMPLATE_DEBUG = True 
+    DEBUG = True
 
 
 #TEMPLATE_DEBUG = False
